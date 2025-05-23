@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#include <fstream>
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 #include "marketplace.h"
 
 using namespace std;
