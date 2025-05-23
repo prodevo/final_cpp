@@ -1,0 +1,14 @@
+﻿  main.cpp
+C:\Users\rrvpi\OneDrive\Рабочий стол\Lesson 1\cpp\ConsoleApplication7\marketplace.h(3,9): warning C4005: _CRT_SECURE_NO_WARNINGS: изменение макроопределения
+  (компиляция исходного файла "main.cpp")
+      C:\Users\rrvpi\OneDrive\Рабочий стол\Lesson 1\cpp\ConsoleApplication7\main.cpp(1,9):
+      см. предыдущее определение "_CRT_SECURE_NO_WARNINGS"
+  
+  market.cpp
+C:\Users\rrvpi\OneDrive\Рабочий стол\Lesson 1\cpp\ConsoleApplication7\marketplace.h(3,9): warning C4005: _CRT_SECURE_NO_WARNINGS: изменение макроопределения
+  (компиляция исходного файла "market.cpp")
+      C:\Users\rrvpi\OneDrive\Рабочий стол\Lesson 1\cpp\ConsoleApplication7\market.cpp(1,9):
+      см. предыдущее определение "_CRT_SECURE_NO_WARNINGS"
+  
+  Создание кода...
+  ConsoleApplication7.vcxproj -> C:\Users\rrvpi\OneDrive\Рабочий стол\Lesson 1\cpp\ConsoleApplication7\x64\Debug\ConsoleApplication7.exe
