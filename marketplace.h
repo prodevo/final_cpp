@@ -1,5 +1,6 @@
 #ifndef marketplace_h
 #define marketplace_h
+#define _CRT_SECURE_NO_WARNINGS 1
 
 struct product {
     int id;
