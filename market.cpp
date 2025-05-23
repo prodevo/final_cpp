@@ -1,10 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <fstream>
 #include "marketplace.h"
 
 using namespace std;
 
-product products[] = { {1, "noutbuk", 1250.1}, {2, "smartphon", 800.2}, {3, "navushnyky", 150.3}, {4, "klaviatura", 60.4}, {5, "mysha(nu ta, kotra dlya kompjutera)", 40.5} };
+product products[] = { {1, "noutbuk", 1250.1f}, {2, "smartphon", 800.2f}, {3, "navushnyky", 150.3f}, {4, "klaviatura", 60.4f}, {5, "mysha(nu ta, kotra dlya kompjutera)", 40.5f} };
 int product_count = sizeof(products) / sizeof(product);
 
 int initialize_cart(cart* cart) {
@@ -52,7 +52,9 @@ int add_to_cart(cart* cart) {
                 cart->items = t;
             }
 
-            cart->items[cart->size++] = { products[i], qty };
+            cart->items[cart->size].product = products[i];
+            cart->items[cart->size].quantity = qty;
+            cart->size++;
             return 0;
         }
     }
@@ -75,25 +77,33 @@ int show_cart(const cart& cart) {
 
 int save_cart(const cart& cart) {
 
-    ofstream out("cart.txt");
+    FILE* file = fopen("cart.txt", "w");
+
+    if (file == nullptr) {
+        perror("ERROR");
+        return 0;
+    }
 
     for (int i = 0; i < cart.size; i++) {
-        out << cart.items[i].product.id << " " << cart.items[i].quantity << "\n";
+        fprintf(file, "%d %d\n", cart.items[i].product.id, cart.items[i].quantity);
     }
-    out.close();
+
+    fclose(file);
     return 0;
 }
 
 int load_cart(cart* cart) {
-    ifstream in("cart.txt");
 
-    if (!in) {
-        return 0;
-    }
+    FILE* file = fopen("cart.txt", "r");
 
     int pid, qty;
 
-    while (in >> pid >> qty) {
+    if (file == nullptr) {
+        perror("ERROR");
+        return 0;
+    }
+
+    while (fscanf(file, "%d %d",  &pid, &qty) == 2) {
 
         for (int i = 0; i < product_count; i++) {
 
@@ -107,11 +117,14 @@ int load_cart(cart* cart) {
                     delete[] cart->items;
                     cart->items = t;
                 }
-                cart->items[cart->size++] = { products[i], qty };
+                cart->items[cart->size].product = products[i];
+                cart->items[cart->size].quantity = qty;
+                cart->size++;
                 break;
             }
         }
     }
-    in.close();
+
+    fclose(file);
     return 0;
 }
